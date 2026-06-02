@@ -26,14 +26,12 @@ else:
 def get_connection():
     """Establishes database connection based on DB_TYPE configuration."""
     if DB_TYPE == "mysql":
-        import mysql.connector
+        import pymysql
         if DATABASE_URL:
             # Parse connection URL if provided
             # e.g., mysql://user:pass@host:port/db
             try:
-                # Basic parsing or passing direct url
-                # mysql.connector supports dictionary configurations
-                # For safety, let's try direct parsing of DATABASE_URL or fallback to env vars
+                # Basic parsing of DATABASE_URL
                 if DATABASE_URL.startswith("mysql://"):
                     clean_url = DATABASE_URL.replace("mysql://", "")
                     user_pass, host_port_db = clean_url.split("@")
@@ -44,30 +42,27 @@ def get_connection():
                     host = host_port.split(":")[0]
                     port = host_port.split(":")[1] if ":" in host_port else "3306"
                     
-                    # Enable SSL mode if cloud database (Aiven) or specified in connection parameters
-                    ssl_args = {}
-                    if "ssl-mode" in DATABASE_URL or "aivencloud" in host:
-                        ssl_args["ssl_mode"] = "REQUIRED"
-
-                    return mysql.connector.connect(
+                    return pymysql.connect(
                         host=host,
                         user=user,
                         password=password,
                         database=db,
-                        port=port,
+                        port=int(port),
                         connect_timeout=10,
-                        **ssl_args
+                        ssl={'ssl': True}
                     )
             except Exception as e:
                 print(f"[DB] Error parsing DATABASE_URL: {e}. Falling back to explicit envs.")
         
-        return mysql.connector.connect(
+        # Fallback to explicit envs
+        return pymysql.connect(
             host=MYSQL_HOST,
             user=MYSQL_USER,
             password=MYSQL_PASSWORD,
             database=MYSQL_DATABASE,
-            port=int(MYSQL_PORT),
-            connect_timeout=10
+            port=int(MYSQL_PORT) if MYSQL_PORT else 3306,
+            connect_timeout=10,
+            ssl={'ssl': True}
         )
     else:
         # Local SQLite DB
