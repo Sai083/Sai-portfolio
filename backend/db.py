@@ -44,13 +44,19 @@ def get_connection():
                     host = host_port.split(":")[0]
                     port = host_port.split(":")[1] if ":" in host_port else "3306"
                     
+                    # Enable SSL mode if cloud database (Aiven) or specified in connection parameters
+                    ssl_args = {}
+                    if "ssl-mode" in DATABASE_URL or "aivencloud" in host:
+                        ssl_args["ssl_mode"] = "REQUIRED"
+
                     return mysql.connector.connect(
                         host=host,
                         user=user,
                         password=password,
                         database=db,
                         port=port,
-                        connect_timeout=10
+                        connect_timeout=10,
+                        **ssl_args
                     )
             except Exception as e:
                 print(f"[DB] Error parsing DATABASE_URL: {e}. Falling back to explicit envs.")

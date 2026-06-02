@@ -4,7 +4,7 @@ const PortfolioAPI = (() => {
   // Automatically switch base URL between local dev (localhost) and production (Render)
   const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://127.0.0.1:5000"
-    : "https://sai-portfolio-backend.onrender.com"; // Live Render backend URL
+    : "https://sai-portfolio-backend-yph0.onrender.com"; // Live Render backend URL
 
   console.log(`[API] Base URL configured to: ${API_BASE}`);
 
