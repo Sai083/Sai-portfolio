@@ -1,0 +1,61 @@
+/* Bhukya Sai Portfolio - Design System Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Fonts */
+  --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Color System (HSL) */
+  --bg-color-raw: 230 60% 4%;            /* Deep space indigo-black */
+  --bg-color: hsl(var(--bg-color-raw));
+  
+  --bg-card-raw: 230 50% 8%;             /* Subtly lighter card background */
+  --bg-card: hsla(var(--bg-card-raw) / 0.65);
+  
+  --bg-panel-raw: 230 50% 12%;           /* Floating elements bg */
+  --bg-panel: hsla(var(--bg-panel-raw) / 0.85);
+
+  /* Primary Accent Colors (Futuristic/AI Neon Palettes) */
+  --color-cyan-raw: 180 100% 50%;
+  --color-cyan: hsl(var(--color-cyan-raw));
+  
+  --color-purple-raw: 280 100% 60%;
+  --color-purple: hsl(var(--color-purple-raw));
+  
+  --color-blue-raw: 215 100% 50%;
+  --color-blue: hsl(var(--color-blue-raw));
+
+  /* Core UI Colors */
+  --text-primary: hsl(0 0% 98%);
+  --text-secondary: hsl(230 15% 70%);
+  --text-muted: hsl(230 10% 50%);
+  
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-color-glow: hsla(180 100% 50% / 0.2);
+
+  /* Status Badges */
+  --status-pending: hsl(35 90% 55%);
+  --status-contacted: hsl(215 100% 50%);
+  --status-scheduled: hsl(280 100% 60%);
+  --status-archived: hsl(230 10% 50%);
+  --status-success: hsl(145 80% 50%);
+
+  /* Gradients */
+  --gradient-blue: linear-gradient(135deg, hsl(215, 100%, 50%), hsl(250, 100%, 60%));
+  --gradient-neon: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+  --gradient-dark: linear-gradient(180deg, hsla(var(--bg-color-raw) / 0.95), hsla(var(--bg-card-raw) / 0.98));
+  --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+  /* Glassmorphism Specs */
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --glass-shadow-neon-cyan: 0 0 25px -5px hsla(var(--color-cyan-raw) / 0.35);
+  --glass-shadow-neon-purple: 0 0 25px -5px hsla(var(--color-purple-raw) / 0.35);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

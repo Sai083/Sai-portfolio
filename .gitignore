@@ -1,0 +1,12 @@
+# Local environment variables
+.env
+
+# Local SQLite databases
+backend/portfolio.db
+backend/__pycache__/
+__pycache__/
+*.pyc
+
+# OS generated files
+.DS_Store
+Thumbs.db
