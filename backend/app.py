@@ -37,57 +37,39 @@ def check_auth(req):
     return parts[1] == AUTH_TOKEN
 
 def send_email_notification(name, company, email, position, message):
-    """Sends a real-time email notification to Bhukya Sai's inbox using Gmail SMTP."""
-    sender_email = os.getenv("SMTP_USER")
-    sender_password = os.getenv("SMTP_PASSWORD")
-    recipient_email = os.getenv("NOTIFICATION_EMAIL", "bhukyasai003@gmail.com")
-    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = os.getenv("SMTP_PORT", "587")
+    """Sends a real-time email notification to Bhukya Sai's inbox using Web3Forms HTTP API (bypasses Render SMTP block)."""
+    web3forms_key = os.getenv("WEB3FORMS_ACCESS_KEY")
 
-    if not sender_email or not sender_password:
-        print("[Email Notification] SMTP_USER and SMTP_PASSWORD not set in env variables. Mock log notification printed.")
+    if not web3forms_key:
+        print("[Email Notification] WEB3FORMS_ACCESS_KEY not set in env variables. Skipping real email alert.")
         return False
 
-    subject = f"🚨 New Recruiter Contact: {name} from {company}"
-    body = f"""Hello Bhukya Sai,
-
-You have received a new recruiter inquiry from your portfolio website!
-
-DETAILS:
---------------------------------------------------
-Recruiter Name:  {name}
-Company Name:    {company}
-Recruiter Email: {email}
-Job Position:    {position}
-
-MESSAGE CONTENT:
-{message}
---------------------------------------------------
-
-This contact entry has been stored in your Railway/SQLite database. You can log in to your Recruiter Dashboard to schedule interviews.
-
-Best regards,
-Bhukya Sai Portfolio Automation
-"""
-
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
-
+    # Using Web3Forms HTTP API (Port 443) instead of SMTP (Port 587)
+    url = "https://api.web3forms.com/submit"
+    
+    payload = {
+        "access_key": web3forms_key,
+        "subject": f"🚨 New Recruiter Contact: {name} from {company}",
+        "from_name": "Portfolio Alerts",
+        "name": name,
+        "email": email,
+        "company": company,
+        "position": position,
+        "message": message
+    }
+    
     try:
-        # Add a 5 second timeout because Render Free tier often blocks outbound SMTP ports,
-        # which can cause the thread to hang indefinitely.
-        server = smtplib.SMTP(smtp_host, int(smtp_port), timeout=5)
-        server.starttls()  # Secure connection
-        server.login(sender_email, sender_password)
-        server.sendmail(sender_email, recipient_email, msg.as_string())
-        server.quit()
-        print(f"[Email Notification] Real email alert dispatched successfully to {recipient_email}.")
-        return True
+        import requests
+        response = requests.post(url, json=payload, timeout=10)
+        
+        if response.status_code == 200:
+            print("[Email Notification] HTTP email alert dispatched successfully via Web3Forms.")
+            return True
+        else:
+            print(f"[Email Notification] Web3Forms failed: {response.text}")
+            return False
     except Exception as e:
-        print(f"[Email Notification] Failed to dispatch SMTP email: {e}")
+        print(f"[Email Notification] Failed to dispatch HTTP email: {e}")
         return False
 
 # Initialize Database Schema on app startup
