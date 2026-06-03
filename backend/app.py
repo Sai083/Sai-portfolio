@@ -37,36 +37,29 @@ def check_auth(req):
     return parts[1] == AUTH_TOKEN
 
 def send_email_notification(name, company, email, position, message):
-    """Sends a real-time email notification to Bhukya Sai's inbox using Web3Forms HTTP API (bypasses Render SMTP block)."""
-    web3forms_key = os.getenv("WEB3FORMS_ACCESS_KEY")
-
-    if not web3forms_key:
-        print("[Email Notification] WEB3FORMS_ACCESS_KEY not set in env variables. Skipping real email alert.")
-        return False
-
-    # Using Web3Forms HTTP API (Port 443) instead of SMTP (Port 587)
-    url = "https://api.web3forms.com/submit"
+    """Sends an email notification using Formsubmit API (requires no API keys)."""
+    
+    # Formsubmit ajax endpoint for the target email
+    url = "https://formsubmit.co/ajax/bhukyasai003@gmail.com"
     
     payload = {
-        "access_key": web3forms_key,
-        "subject": f"🚨 New Recruiter Contact: {name} from {company}",
-        "from_name": "Portfolio Alerts",
-        "name": name,
-        "email": email,
-        "company": company,
-        "position": position,
-        "message": message
+        "_subject": f"🚨 New Recruiter Contact: {name} from {company}",
+        "Name": name,
+        "Email": email,
+        "Company": company,
+        "Position": position,
+        "Message": message
     }
     
     try:
         import requests
-        response = requests.post(url, json=payload, timeout=10)
+        response = requests.post(url, json=payload, headers={"Accept": "application/json"}, timeout=10)
         
         if response.status_code == 200:
-            print("[Email Notification] HTTP email alert dispatched successfully via Web3Forms.")
+            print("[Email Notification] Alert dispatched successfully via Formsubmit.")
             return True
         else:
-            print(f"[Email Notification] Web3Forms failed: {response.text}")
+            print(f"[Email Notification] Formsubmit failed: {response.text}")
             return False
     except Exception as e:
         print(f"[Email Notification] Failed to dispatch HTTP email: {e}")
