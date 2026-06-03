@@ -837,7 +837,10 @@
       e.preventDefault();
       const submitBtn = e.target.querySelector("button[type='submit']");
       const originalText = submitBtn.textContent;
-      submitBtn.textContent = "Transmitting Message...";
+      submitBtn.innerHTML = `<span style="display:inline-flex; align-items:center; gap:0.5rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" style="animation: spin 1s linear infinite;" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+        Transmitting Message...
+      </span>`;
       submitBtn.disabled = true;
 
       const formData = {
@@ -858,7 +861,25 @@
         // Reset form
         e.target.reset();
       } catch (error) {
-        alert(`Transmission failure: ${error.message}`);
+        // Show a user-friendly inline error instead of a raw alert
+        const isNetworkError = error.message === "Failed to fetch" || error.name === "TypeError";
+        const errorMsg = isNetworkError
+          ? "The server is currently waking up (free hosting cold start). Please wait 30 seconds and try again — your message will go through!"
+          : `Submission error: ${error.message}`;
+        
+        // Create or update inline error banner
+        let errorBanner = document.getElementById("contact-error-banner");
+        if (!errorBanner) {
+          errorBanner = document.createElement("div");
+          errorBanner.id = "contact-error-banner";
+          errorBanner.style.cssText = "background: rgba(255, 82, 82, 0.12); border: 1px solid rgba(255, 82, 82, 0.3); color: #ff8a80; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.4;";
+          e.target.insertBefore(errorBanner, e.target.querySelector(".form-group"));
+        }
+        errorBanner.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="#ff8a80" style="flex-shrink:0; margin-top:2px;"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg><span>${errorMsg}</span>`;
+        errorBanner.style.display = "flex";
+        
+        // Auto-hide error after 10 seconds
+        setTimeout(() => { if (errorBanner) errorBanner.style.display = "none"; }, 10000);
       } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;

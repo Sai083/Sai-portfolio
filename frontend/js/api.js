@@ -8,10 +8,14 @@ const PortfolioAPI = (() => {
 
   console.log(`[API] Base URL configured to: ${API_BASE}`);
 
+  // Track backend readiness (Render free tier cold starts can take 30-180s)
+  let _backendAwake = false;
+
   /**
-   * Helper to perform fetch requests with JSON parsing and headers
+   * Helper to perform fetch requests with JSON parsing, headers, and automatic retry
+   * for Render cold-start failures (free tier spins down after inactivity).
    */
-  async function request(endpoint, options = {}) {
+  async function request(endpoint, options = {}, retries = 3) {
     const url = `${API_BASE}${endpoint}`;
     
     // Set headers
@@ -25,19 +29,55 @@ const PortfolioAPI = (() => {
       headers
     };
 
-    try {
-      const response = await fetch(url, config);
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || `Request failed with status ${response.status}`);
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || `Request failed with status ${response.status}`);
+        }
+        
+        _backendAwake = true;
+        return data;
+      } catch (error) {
+        const isNetworkError = error.message === "Failed to fetch" || error.name === "TypeError";
+        
+        if (isNetworkError && attempt < retries) {
+          // Exponential backoff: 2s, 4s, ...
+          const delay = Math.pow(2, attempt) * 1000;
+          console.warn(`[API] Attempt ${attempt}/${retries} failed on ${endpoint}. Backend may be waking up. Retrying in ${delay / 1000}s...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          continue;
+        }
+        
+        console.error(`[API] Error on ${endpoint} (attempt ${attempt}/${retries}):`, error);
+        throw error;
       }
-      
-      return data;
-    } catch (error) {
-      console.error(`[API] Error on ${endpoint}:`, error);
-      throw error;
     }
+  }
+
+  /**
+   * Pre-warms the Render backend so subsequent API calls succeed faster.
+   * Call this on page load to reduce cold-start latency for real user actions.
+   */
+  async function warmUpBackend() {
+    if (_backendAwake) return;
+    try {
+      console.log("[API] Sending warm-up ping to backend...");
+      const res = await fetch(`${API_BASE}/api/portfolio`, { method: "GET" });
+      if (res.ok) {
+        _backendAwake = true;
+        console.log("[API] Backend is awake and responsive.");
+      }
+    } catch (e) {
+      console.log("[API] Backend warm-up ping failed (may still be cold). Requests will retry automatically.");
+    }
+  }
+
+  // Immediately start warming up the backend when the page loads
+  if (API_BASE.includes("onrender.com")) {
+    warmUpBackend();
   }
 
   return {

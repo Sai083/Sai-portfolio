@@ -77,7 +77,9 @@ Bhukya Sai Portfolio Automation
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        server = smtplib.SMTP(smtp_host, int(smtp_port))
+        # Add a 5 second timeout because Render Free tier often blocks outbound SMTP ports,
+        # which can cause the thread to hang indefinitely.
+        server = smtplib.SMTP(smtp_host, int(smtp_port), timeout=5)
         server.starttls()  # Secure connection
         server.login(sender_email, sender_password)
         server.sendmail(sender_email, recipient_email, msg.as_string())
@@ -133,8 +135,15 @@ def submit_contact_form():
         print(f"Message: {message}")
         print("="*50 + "\n")
         
-        # Trigger real-time email notification to bhukyasai003@gmail.com
-        send_email_notification(name, company, email, position, message)
+        # Trigger real-time email notification to bhukyasai003@gmail.com in a background thread
+        # This prevents Gunicorn worker timeouts if Render blocks outbound SMTP ports
+        import threading
+        email_thread = threading.Thread(
+            target=send_email_notification,
+            args=(name, company, email, position, message)
+        )
+        email_thread.daemon = True
+        email_thread.start()
         
         # Generate automated response
         auto_reply = (
