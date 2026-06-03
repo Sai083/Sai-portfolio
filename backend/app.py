@@ -117,15 +117,9 @@ def submit_contact_form():
         print(f"Message: {message}")
         print("="*50 + "\n")
         
-        # Trigger real-time email notification to bhukyasai003@gmail.com in a background thread
-        # This prevents Gunicorn worker timeouts if Render blocks outbound SMTP ports
-        import threading
-        email_thread = threading.Thread(
-            target=send_email_notification,
-            args=(name, company, email, position, message)
-        )
-        email_thread.daemon = True
-        email_thread.start()
+        # Trigger real-time email notification to bhukyasai003@gmail.com
+        # Now that we use Web3Forms HTTP API with a 10s timeout, it's safe to run synchronously
+        email_dispatched = send_email_notification(name, company, email, position, message)
         
         # Generate automated response
         auto_reply = (
@@ -142,6 +136,7 @@ def submit_contact_form():
             "success": True,
             "message_id": msg_id,
             "auto_reply": auto_reply,
+            "email_alert_sent": email_dispatched,
             "message": "Message submitted successfully. Notification generated."
         }), 201
         
