@@ -23,9 +23,7 @@
   <video autoplay muted loop playsinline id="bg-video-welcome" class="bg-video-layer">
     <source src="assets/bhukyasai___Hello_and_welc.mp4" type="video/mp4">
   </video>
-  <video loop playsinline id="bg-video-avatar" class="bg-video-layer">
-    <source src="assets/Welcome_to_my_portfolio_I_am.mp4" type="video/mp4">
-  </video>
+  <!-- Second page video removed for a professional static cosmic background -->
 
   <!-- Background Particle Canvas & Glow overlays -->
   <canvas id="bg-canvas"></canvas>
@@ -716,7 +714,12 @@
   <script>
     // --- FULLSCREEN BACKGROUND VIDEO CONTROLS (WELCOME & AVATAR) ---
     const bgVideoWelcome = document.getElementById("bg-video-welcome");
-    const bgVideoAvatar = document.getElementById("bg-video-avatar");
+    const bgVideoAvatar = {
+      style: { opacity: "0" },
+      pause: function() {},
+      play: function() { return Promise.resolve(); },
+      muted: true
+    };
     const bgVideoHud = document.getElementById("bg-video-hud");
     const hudPlayBtn = document.getElementById("bg-hud-play");
     const hudMuteBtn = document.getElementById("bg-hud-volume");
