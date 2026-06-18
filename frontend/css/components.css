@@ -82,12 +82,12 @@
 .btn-primary {
   background: var(--gradient-blue);
   color: var(--text-primary);
-  box-shadow: 0 4px 15px rgba(255, 42, 42, 0.3);
+  box-shadow: 0 4px 15px hsla(var(--color-blue-raw) / 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 42, 42, 0.5), 0 0 10px var(--color-cyan);
+  box-shadow: 0 6px 20px hsla(var(--color-blue-raw) / 0.5), 0 0 10px var(--color-cyan);
 }
 
 .btn-secondary {
@@ -107,12 +107,12 @@
 .btn-accent {
   background: var(--gradient-neon);
   color: var(--text-primary);
-  box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+  box-shadow: 0 4px 15px hsla(var(--color-purple-raw) / 0.3);
 }
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.5), 0 0 15px var(--color-purple);
+  box-shadow: 0 6px 20px hsla(var(--color-purple-raw) / 0.5), 0 0 15px var(--color-purple);
 }
 
 /* Interactive Badge Chips */
@@ -201,7 +201,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(220, 20, 60, 0.4);
+  box-shadow: 0 4px 20px hsla(var(--color-purple-raw) / 0.4);
   z-index: 99;
   transition: var(--transition-normal);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -209,7 +209,7 @@
 
 .chat-launcher:hover {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 6px 25px rgba(220, 20, 60, 0.6), 0 0 15px var(--color-cyan);
+  box-shadow: 0 6px 25px hsla(var(--color-purple-raw) / 0.6), 0 0 15px var(--color-cyan);
 }
 
 .chat-launcher svg {
@@ -301,9 +301,9 @@ textarea.form-control {
 }
 
 .chat-mic-btn.recording {
-  background: rgba(255, 0, 100, 0.15);
-  border-color: #ff0055;
-  color: #ff0055;
+  background: hsla(var(--color-purple-raw) / 0.15);
+  border-color: var(--color-purple);
+  color: var(--color-purple);
   animation: mic-pulse-glow 1.5s infinite ease-in-out;
 }
 
@@ -315,11 +315,11 @@ textarea.form-control {
 
 @keyframes mic-pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
+    box-shadow: 0 0 5px hsla(var(--color-purple-raw) / 0.3);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 15px rgba(255, 0, 85, 0.7);
+    box-shadow: 0 0 15px hsla(var(--color-purple-raw) / 0.7);
     transform: scale(1.08);
   }
 }

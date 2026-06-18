@@ -386,7 +386,7 @@
 }
 
 .project-impact {
-  background: rgba(255, 42, 42, 0.03);
+  background: hsla(var(--color-cyan-raw) / 0.03);
   border-left: 3px solid var(--color-cyan);
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
@@ -556,8 +556,8 @@
 }
 
 .badge-pending { background: rgba(230, 150, 0, 0.15); color: var(--status-pending); border: 1px solid rgba(230, 150, 0, 0.3); }
-.badge-contacted { background: rgba(255, 42, 42, 0.15); color: var(--status-contacted); border: 1px solid rgba(255, 42, 42, 0.3); }
-.badge-scheduled { background: rgba(220, 20, 60, 0.15); color: var(--status-scheduled); border: 1px solid rgba(220, 20, 60, 0.3); }
+.badge-contacted { background: hsla(var(--color-cyan-raw) / 0.15); color: var(--status-contacted); border: 1px solid hsla(var(--color-cyan-raw) / 0.3); }
+.badge-scheduled { background: hsla(var(--color-purple-raw) / 0.15); color: var(--status-scheduled); border: 1px solid hsla(var(--color-purple-raw) / 0.3); }
 .badge-archived { background: rgba(150, 150, 150, 0.15); color: var(--status-archived); border: 1px solid rgba(150, 150, 150, 0.3); }
 
 /* Dashboard Login Overlay */

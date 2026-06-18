@@ -16,14 +16,14 @@
   --bg-panel-raw: 0 0% 10%;              /* Floating elements bg */
   --bg-panel: hsla(var(--bg-panel-raw) / 0.85);
 
-  /* Primary Accent Colors (Dark/Red Palettes) */
-  --color-cyan-raw: 0 100% 58%;          /* Vibrant Red */
+  /* Primary Accent Colors (Cyan/Purple/Blue Palettes) */
+  --color-cyan-raw: 190 100% 58%;        /* Electric Cyan */
   --color-cyan: hsl(var(--color-cyan-raw));
   
-  --color-purple-raw: 350 90% 50%;       /* Crimson Red */
+  --color-purple-raw: 270 90% 65%;       /* Neon Purple */
   --color-purple: hsl(var(--color-purple-raw));
   
-  --color-blue-raw: 10 90% 55%;          /* Soft Red / Orange-Red */
+  --color-blue-raw: 220 100% 60%;        /* Vibrant Blue */
   --color-blue: hsl(var(--color-blue-raw));
 
   /* Core UI Colors */
@@ -36,13 +36,13 @@
 
   /* Status Badges */
   --status-pending: hsl(35 90% 55%);
-  --status-contacted: hsl(0 100% 58%);
-  --status-scheduled: hsl(350 90% 50%);
+  --status-contacted: hsl(210 100% 58%);
+  --status-scheduled: hsl(270 90% 65%);
   --status-archived: hsl(0 0% 50%);
   --status-success: hsl(145 80% 50%);
 
   /* Gradients */
-  --gradient-blue: linear-gradient(135deg, hsl(0, 100%, 58%), hsl(350, 90%, 50%));
+  --gradient-blue: linear-gradient(135deg, hsl(210, 100%, 58%), hsl(270, 90%, 65%));
   --gradient-neon: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
   --gradient-dark: linear-gradient(180deg, hsla(var(--bg-color-raw) / 0.95), hsla(var(--bg-card-raw) / 0.98));
   --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
