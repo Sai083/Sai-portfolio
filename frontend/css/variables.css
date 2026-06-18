@@ -10,8 +10,8 @@
   --bg-color-raw: 0 0% 4%;               /* Deep space dark */
   --bg-color: hsl(var(--bg-color-raw));
   
-  --bg-card-raw: 0 0% 7%;                /* Subtly lighter card background */
-  --bg-card: hsla(var(--bg-card-raw) / 0.65);
+  --bg-card-raw: 0 0% 100%;                /* White for glass effect */
+  --bg-card: hsla(var(--bg-card-raw) / 0.05);
   
   --bg-panel-raw: 0 0% 10%;              /* Floating elements bg */
   --bg-panel: hsla(var(--bg-panel-raw) / 0.85);
@@ -48,11 +48,12 @@
   --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
 
   /* Glassmorphism Specs */
-  --glass-blur: blur(12px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.07);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --glass-shadow-neon-cyan: 0 0 25px -5px hsla(var(--color-cyan-raw) / 0.35);
-  --glass-shadow-neon-purple: 0 0 25px -5px hsla(var(--color-purple-raw) / 0.35);
+  --glass-blur: blur(20px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+  --glass-border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-shadow-neon-cyan: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px -5px hsla(var(--color-cyan-raw) / 0.45);
+  --glass-shadow-neon-purple: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px -5px hsla(var(--color-purple-raw) / 0.45);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
