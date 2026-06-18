@@ -3,11 +3,11 @@
 
 :root {
   /* Fonts */
-  --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
+  --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
 
   /* Color System (HSL) */
-  --bg-color-raw: 0 0% 4%;               /* Deep space dark */
+  --bg-color-raw: 0 0% 0.4%;               /* Veldara deep dark #010101 */
   --bg-color: hsl(var(--bg-color-raw));
   
   --bg-card-raw: 0 0% 100%;                /* White for glass effect */

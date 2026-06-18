@@ -19,14 +19,17 @@
 </head>
 <body>
 
-  <!-- Fullscreen Video Backgrounds (Stacked Layers) -->
-  <video autoplay muted loop playsinline id="bg-video-welcome" class="bg-video-layer">
-    <source src="assets/bhukyasai___Hello_and_welc.mp4" type="video/mp4">
-  </video>
-  <!-- Second page video removed for a professional static cosmic background -->
+  <!-- Scroll Video Background -->
+  <div id="scroll-video-container">
+    <canvas id="video-canvas"></canvas>
+    <video id="video-fallback" muted playsinline preload="auto" crossorigin="anonymous"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260616_212935_bbf608da-62d1-4f25-9be4-c346e4d09cc8.mp4"
+    ></video>
+    <div class="overlay"></div>
+  </div>
 
-  <!-- Background Particle Canvas -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Particles -->
+  <canvas id="particles-canvas"></canvas>
 
   <!-- Header Navigation -->
   <header class="header">
@@ -34,7 +37,7 @@
       <span></span> SaiDataHub
     </a>
     <ul class="nav-links">
-      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#hero" class="nav-link active">Home</a></li>
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#skills" class="nav-link">Skills</a></li>
       <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -46,75 +49,68 @@
     </ul>
   </header>
 
-  <div class="container">
+  <!-- Fixed Cards -->
+  <div id="fixed-cards">
+    <div class="grid">
+      <div class="card">
+        <h3>Data Analytics</h3>
+        <p>Transforming raw datasets into compelling, transparent visual stories to empower business decisions.</p>
+      </div>
+      <div class="card">
+        <h3>Business Intelligence</h3>
+        <p>Designing interactive executive dashboards and scalable reporting pipelines for real-time tracking.</p>
+      </div>
+      <div class="card">
+        <h3>Machine Learning</h3>
+        <p>Leveraging predictive modeling and generative AI to uncover hidden patterns and drive automation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <div id="content">
     
-    <!-- HOME / HERO SECTION -->
-    <section id="home" class="hero">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="hero-greeting">Hi, I am</div>
-          <h1 class="hero-name">Bhukya Sai</h1>
-          <div class="hero-title">
-            <span id="typing-text"></span><span class="cursor-blink">|</span>
+    <!-- Section 1: Hero -->
+    <section id="hero">
+      <div class="gradient-overlay"></div>
+      <div class="content">
+        <p class="subtitle">Professional Data Analyst:</p>
+        <h1>
+          Transforming complex data into
+          <span class="underlined"><span class="line"></span><span>actionable insights</span></span>.
+        </h1>
+        <div class="ctas">
+          <div class="code-box">
+            <span class="prompt">&gt;</span>
+            <code>import pandas as pd</code>
           </div>
-          
-          <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary">
-              Hire Me 
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            </a>
-            <a href="#projects" class="btn btn-secondary">View Projects</a>
-            <a href="assets/SaiResume.pdf" target="_blank" class="btn btn-accent">Download Resume</a>
-          </div>
-
-          <!-- Hero Statistics Cards -->
-          <div class="stats-grid">
-            <div class="glass-card stat-item">
-              <div class="stat-num text-gradient-neon">330+</div>
-              <div class="stat-label">Cars Scraped</div>
-            </div>
-            <div class="glass-card stat-item card-purple">
-              <div class="stat-num text-gradient-blue">2+</div>
-              <div class="stat-label">Internships</div>
-            </div>
-            <div class="glass-card stat-item">
-              <div class="stat-num text-gradient-neon">8.54</div>
-              <div class="stat-label">B.Tech CGPA</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="avatar-orbit">
-            <div class="avatar-core">
-              <div class="avatar-inner">
-                <!-- Glowing Core SVG Icon -->
-                <svg viewBox="0 0 24 24">
-                  <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Orbital floating tech icons -->
-            <div class="floating-icon fi-1" title="Python">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14.25.18c-.98.2-1.68.88-1.74 1.77v2.23H15c2.4 0 3.75 1.35 3.75 3.75V11c2.4 0 3.75-1.35 3.75-3.75V3.5A3.32 3.32 0 0 0 19.18.18ZM6.5 6A3.32 3.32 0 0 0 3.18 9.25c-.2.98.48 1.68 1.37 1.74h2.23V7.25C6.78 4.85 8.13 3.5 10.53 3.5H14c-2.4 0-3.75 1.35-3.75 3.75V11H6.5ZM12.75 13c-.9 0-1.5.6-1.5 1.5v6.25c0 .9.6 1.5 1.5 1.5h6.25c.9 0 1.5-.6 1.5-1.5v-6.25c0-.9-.6-1.5-1.5-1.5Z"/>
-              </svg>
-            </div>
-            <div class="floating-icon fi-2" title="SQL">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 4.02 2 6.5s4.48 4.5 10 4.5 10-2.02 10-4.5S17.52 2 12 2zm0 11c-5.52 0-10-2.02-10-4.5V11c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5V8.5c0 2.48-4.48 4.5-10 4.5zm0 4.5c-5.52 0-10-2.02-10-4.5V16c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v-2.5c0 2.48-4.48 4.5-10 4.5z"/>
-              </svg>
-            </div>
-            <div class="floating-icon fi-3" title="Power BI">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M9 17H5v-6h4v6zm6 0h-4V7h4v10zm6 0h-4V3h4v14z"/>
-              </svg>
-            </div>
-          </div>
+          <a href="#projects" class="cta-btn">Explore Projects <span>&rarr;</span></a>
         </div>
       </div>
+      <div class="bounce-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+      </div>
     </section>
+
+    <!-- Spacer -->
+    <div style="height:150vh;"></div>
+
+    <!-- Cards Trigger Zone -->
+    <div id="cards-trigger" style="height:200vh;"></div>
+
+    <!-- Spacer -->
+    <div style="height:100vh;"></div>
+
+    <!-- Section 3 Gateway -->
+    <section id="section-three">
+      <div class="inner" id="section-three-inner">
+        <p>Presenting</p>
+        <h2>Bhukya Sai</h2>
+      </div>
+    </section>
+
+    <!-- Legacy Container for Existing Sections -->
+    <div class="container">
 
     <!-- ABOUT SECTION -->
     <section id="about">
@@ -623,6 +619,7 @@
     </footer>
 
   </div>
+</div>
 
   <!-- FLOATING AI ASSISTANT BUBBLE -->
   <div id="chat-launcher" class="chat-launcher" title="Ask Sai's AI Assistant">
@@ -689,19 +686,6 @@
     </form>
   </div>
 
-  <!-- Floating Background Video Controls HUD -->
-  <div id="bg-video-hud" class="bg-video-hud">
-    <button id="bg-hud-play" class="hud-btn" aria-label="Play/Pause Background Video">
-      <svg class="pause-icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      <svg class="play-icon" viewBox="0 0 24 24" style="width:18px; height:18px; display:none;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-    </button>
-    <button id="bg-hud-volume" class="hud-btn" aria-label="Unmute Background Video">
-      <svg class="mute-icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-      <svg class="unmute-icon" viewBox="0 0 24 24" style="width:18px; height:18px; display:none;"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-    </button>
-    <span class="hud-label">Background Sound Off</span>
-  </div>
-
   <!-- Javascript Modules -->
   <script src="js/api.js"></script>
   <script src="js/theme.js"></script>
@@ -710,128 +694,231 @@
   <script src="js/dashboard.js"></script>
   
   <script>
-    // --- FULLSCREEN BACKGROUND VIDEO CONTROLS (WELCOME & AVATAR) ---
-    const bgVideoWelcome = document.getElementById("bg-video-welcome");
-    const bgVideoAvatar = {
-      style: { opacity: "0" },
-      pause: function() {},
-      play: function() { return Promise.resolve(); },
-      muted: true
-    };
-    const bgVideoHud = document.getElementById("bg-video-hud");
-    const hudPlayBtn = document.getElementById("bg-hud-play");
-    const hudMuteBtn = document.getElementById("bg-hud-volume");
-    const hudLabel = document.querySelector("#bg-video-hud .hud-label");
+    // --- VELDARA SCROLL VIDEO & PARTICLES ---
+    (function() {
+      // ===================== SCROLL VIDEO =====================
+      const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260616_212935_bbf608da-62d1-4f25-9be4-c346e4d09cc8.mp4';
+      const canvas = document.getElementById('video-canvas');
+      const videoEl = document.getElementById('video-fallback');
+      const ctx = canvas.getContext('2d');
+      let frames = [];
+      let framesReady = false;
+      let lastFrameIndex = -1;
+      let videoSeeking = false;
 
-    const hudPlayIcon = hudPlayBtn.querySelector(".play-icon");
-    const hudPauseIcon = hudPlayBtn.querySelector(".pause-icon");
-    const hudMuteIcon = hudMuteBtn.querySelector(".mute-icon");
-    const hudUnmuteIcon = hudMuteBtn.querySelector(".unmute-icon");
+      function resizeCanvas() {
+        const dpr = Math.min(devicePixelRatio, 2);
+        const rect = canvas.getBoundingClientRect();
+        const w = Math.round(rect.width * dpr);
+        const h = Math.round(rect.height * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        lastFrameIndex = -1;
+      }
 
-    // Global playback states
-    let isBgPaused = false;
-    let isBgMuted = true; // Started muted by default for browser permissions
-    let activeVideo = bgVideoWelcome;
+      async function extractFrames() {
+        try {
+          const response = await fetch(VIDEO_URL, { mode: 'cors' });
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
 
-    // Set initial display states
-    bgVideoWelcome.style.opacity = "0.35";
-    bgVideoAvatar.style.opacity = "0";
+          const video = document.createElement('video');
+          video.muted = true;
+          video.playsInline = true;
+          video.crossOrigin = 'anonymous';
+          video.preload = 'auto';
+          video.src = objectUrl;
 
-    function updateActiveVideoState() {
-      const isFirstPage = window.scrollY < window.innerHeight - 150;
-      const targetVideo = isFirstPage ? bgVideoWelcome : bgVideoAvatar;
-      const inactiveVideo = isFirstPage ? bgVideoAvatar : bgVideoWelcome;
+          await new Promise((resolve, reject) => {
+            video.onloadedmetadata = () => resolve();
+            video.onerror = () => reject();
+            setTimeout(() => reject(), 15000);
+          });
 
-      // HUD Visibility: Only visible on the First Page (Hero/Intro)
-      if (bgVideoHud) {
-        if (isFirstPage) {
-          bgVideoHud.style.opacity = "1";
-          bgVideoHud.style.pointerEvents = "auto";
-        } else {
-          bgVideoHud.style.opacity = "0";
-          bgVideoHud.style.pointerEvents = "none";
+          const scale = Math.min(1, 1280 / video.videoWidth);
+          const scaledWidth = Math.round(video.videoWidth * scale);
+          const scaledHeight = Math.round(video.videoHeight * scale);
+          const frameCount = Math.max(30, Math.min(120, Math.round(video.duration * 24)));
+
+          for (let i = 0; i < frameCount; i++) {
+            const time = (i / (frameCount - 1)) * (video.duration - 0.05);
+            video.currentTime = time;
+            await new Promise((resolve, reject) => {
+              const onSeeked = () => { video.removeEventListener('seeked', onSeeked); resolve(); };
+              video.addEventListener('seeked', onSeeked);
+              setTimeout(() => { video.removeEventListener('seeked', onSeeked); reject(); }, 3000);
+            });
+            const bitmap = await createImageBitmap(video, { resizeWidth: scaledWidth, resizeHeight: scaledHeight });
+            frames.push(bitmap);
+          }
+
+          if (frames.length > 0) {
+            framesReady = true;
+            canvas.style.visibility = 'visible';
+            videoEl.style.display = 'none';
+          }
+          URL.revokeObjectURL(objectUrl);
+        } catch(e) { /* fallback to video seeking */ }
+      }
+
+      function getScrollBounds() {
+        const vh = window.innerHeight;
+        return { start: vh * 0.5, end: document.documentElement.scrollHeight - vh };
+      }
+
+      function getProgress() {
+        const { start, end } = getScrollBounds();
+        const range = end - start;
+        if (range <= 0) return 0;
+        return Math.max(0, Math.min(1, (window.scrollY - start) / range));
+      }
+
+      function drawFrame(frame) {
+        const cw = canvas.width, ch = canvas.height;
+        const s = Math.max(cw / frame.width, ch / frame.height);
+        const dw = frame.width * s, dh = frame.height * s;
+        ctx.drawImage(frame, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+      }
+
+      function videoTick() {
+        const progress = getProgress();
+        if (framesReady && frames.length > 0) {
+          const idx = Math.round(progress * (frames.length - 1));
+          if (idx !== lastFrameIndex) {
+            lastFrameIndex = idx;
+            if (frames[idx]) drawFrame(frames[idx]);
+          }
+        } else if (videoEl.duration && isFinite(videoEl.duration) && videoEl.readyState >= 1) {
+          const target = progress * videoEl.duration;
+          if (!videoSeeking && Math.abs(videoEl.currentTime - target) > 0.001) {
+            videoSeeking = true;
+            videoEl.currentTime = target;
+          }
+        }
+        requestAnimationFrame(videoTick);
+      }
+
+      videoEl.addEventListener('seeked', () => { videoSeeking = false; });
+      videoEl.addEventListener('stalled', () => { videoSeeking = false; });
+      videoEl.addEventListener('loadeddata', () => { videoEl.currentTime = 0; });
+      canvas.style.visibility = 'hidden';
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      requestAnimationFrame(videoTick);
+      extractFrames();
+
+      // ===================== PARTICLES =====================
+      const pCanvas = document.getElementById('particles-canvas');
+      const pCtx = pCanvas.getContext('2d');
+      let particles = [];
+
+      function resizeParticles() {
+        pCanvas.width = window.innerWidth;
+        pCanvas.height = window.innerHeight;
+        createParticles();
+      }
+
+      function createParticles() {
+        particles = [];
+        const count = Math.floor((pCanvas.width * pCanvas.height) / 12000);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * pCanvas.width,
+            y: Math.random() * pCanvas.height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 1.5 + 0.5,
+            opacity: Math.random() * 0.6 + 0.2
+          });
         }
       }
 
-      if (activeVideo !== targetVideo) {
-        activeVideo = targetVideo;
-
-        // Apply transition styling
-        activeVideo.style.opacity = isFirstPage ? "0.35" : "0.3";
-        inactiveVideo.style.opacity = "0";
-
-        // Stop the inactive video
-        inactiveVideo.pause();
+      function animateParticles() {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+        for (const p of particles) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = pCanvas.width;
+          if (p.x > pCanvas.width) p.x = 0;
+          if (p.y < 0) p.y = pCanvas.height;
+          if (p.y > pCanvas.height) p.y = 0;
+          pCtx.beginPath();
+          pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          pCtx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+          pCtx.fill();
+        }
+        requestAnimationFrame(animateParticles);
       }
 
-      // Sync active state attributes (run on scroll/update)
-      if (isFirstPage) {
-        // Welcome video volume matches HUD toggle state
-        bgVideoWelcome.muted = isBgMuted;
-        bgVideoAvatar.muted = true; // Avatar is kept strictly muted
-      } else {
-        // Scroll off screen -> mute welcome video, keep avatar video muted!
-        bgVideoWelcome.muted = true;
-        bgVideoAvatar.muted = true;
+      resizeParticles();
+      window.addEventListener('resize', resizeParticles);
+      animateParticles();
+
+      // ===================== HERO FADE =====================
+      function updateHeroOpacity() {
+        const fade = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.3));
+        const heroEl = document.getElementById('hero');
+        if(heroEl) heroEl.style.opacity = fade;
       }
+      window.addEventListener('scroll', updateHeroOpacity, { passive: true });
 
-      if (!isBgPaused) {
-        activeVideo.play().catch(err => console.log("Play failed: ", err));
+      // ===================== FIXED CARDS =====================
+      const fixedCards = document.getElementById('fixed-cards');
+      const cardsGrid = fixedCards ? fixedCards.querySelector('.grid') : null;
+
+      function tickCards() {
+        const trigger = document.getElementById('cards-trigger');
+        if(!trigger || !fixedCards || !cardsGrid) return;
+        
+        const rect = trigger.getBoundingClientRect();
+        const triggerTop = rect.top + window.scrollY;
+        const triggerHeight = rect.height;
+        const scrollY = window.scrollY;
+        const vh = window.innerHeight;
+
+        const start = triggerTop - vh * 0.5;
+        const end = triggerTop + triggerHeight - vh * 0.3;
+        const range = end - start;
+
+        let progress = range > 0 ? (scrollY - start) / range : 0;
+        progress = Math.max(0, Math.min(1, progress));
+
+        const isActive = scrollY >= start - vh * 0.2 && scrollY <= end + vh * 0.3;
+        const fadeIn = Math.min(1, Math.max(0, (scrollY - (start - vh * 0.2)) / (vh * 0.2)));
+        const fadeOut = Math.min(1, Math.max(0, (end + vh * 0.3 - scrollY) / (vh * 0.3)));
+        const containerOpacity = isActive ? Math.min(fadeIn, fadeOut) : 0;
+
+        fixedCards.style.opacity = containerOpacity;
+        fixedCards.style.pointerEvents = containerOpacity > 0.1 ? 'auto' : 'none';
+
+        const isMobile = window.innerWidth < 768;
+        const revealPct = progress * 130;
+        if (isMobile) {
+          cardsGrid.style.maskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
+          cardsGrid.style.webkitMaskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
+        } else {
+          cardsGrid.style.maskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
+          cardsGrid.style.webkitMaskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
+        }
+
+        requestAnimationFrame(tickCards);
       }
+      requestAnimationFrame(tickCards);
 
-      updateHudDisplay();
-    }
-
-    function updateHudDisplay() {
-      // Sync Play Button Icons
-      if (isBgPaused) {
-        hudPlayIcon.style.display = "inline";
-        hudPauseIcon.style.display = "none";
-        hudLabel.textContent = "Background Paused";
-      } else {
-        hudPlayIcon.style.display = "none";
-        hudPauseIcon.style.display = "inline";
-        hudLabel.textContent = isBgMuted ? "Background Muted" : "Background Sound On";
+      // ===================== SECTION 3 INTERSECTION =====================
+      const sectionThreeInner = document.getElementById('section-three-inner');
+      if (sectionThreeInner) {
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            sectionThreeInner.classList.add('visible');
+            observer.unobserve(sectionThreeInner);
+          }
+        }, { threshold: 0.15 });
+        observer.observe(sectionThreeInner);
       }
-
-      // Sync Volume Button Icons
-      if (isBgMuted) {
-        hudMuteIcon.style.display = "inline";
-        hudUnmuteIcon.style.display = "none";
-      } else {
-        hudMuteIcon.style.display = "none";
-        hudUnmuteIcon.style.display = "inline";
-      }
-    }
-
-    function toggleBgPlay() {
-      isBgPaused = !isBgPaused;
-      if (isBgPaused) {
-        activeVideo.pause();
-      } else {
-        activeVideo.play().catch(err => console.log("Play failed: ", err));
-      }
-      updateHudDisplay();
-    }
-
-    function toggleBgMute() {
-      isBgMuted = !isBgMuted;
-      // Note: Only the welcome video will output sound when isBgMuted is false (first page scroll check handles this)
-      bgVideoWelcome.muted = isBgMuted;
-      bgVideoAvatar.muted = true; // Stays muted
-      updateHudDisplay();
-    }
-
-    // Bind scroll events to swap active background layer
-    window.addEventListener("scroll", updateActiveVideoState);
-
-    if (bgVideoWelcome && hudPlayBtn && hudMuteBtn) {
-      hudPlayBtn.addEventListener("click", toggleBgPlay);
-      hudMuteBtn.addEventListener("click", toggleBgMute);
-      
-      // Initialize states on page load
-      updateActiveVideoState();
-    }
+    })();
 
     // Bind Contact Form submission to the Dynamic API Client
     document.getElementById("contact-form").addEventListener("submit", async (e) => {
