@@ -7,42 +7,42 @@
   --font-body: 'Inter', sans-serif;
 
   /* Color System (HSL) */
-  --bg-color-raw: 230 60% 4%;            /* Deep space indigo-black */
+  --bg-color-raw: 0 0% 4%;               /* Deep space dark */
   --bg-color: hsl(var(--bg-color-raw));
   
-  --bg-card-raw: 230 50% 8%;             /* Subtly lighter card background */
+  --bg-card-raw: 0 0% 7%;                /* Subtly lighter card background */
   --bg-card: hsla(var(--bg-card-raw) / 0.65);
   
-  --bg-panel-raw: 230 50% 12%;           /* Floating elements bg */
+  --bg-panel-raw: 0 0% 10%;              /* Floating elements bg */
   --bg-panel: hsla(var(--bg-panel-raw) / 0.85);
 
-  /* Primary Accent Colors (Futuristic/AI Neon Palettes) */
-  --color-cyan-raw: 180 100% 50%;
+  /* Primary Accent Colors (Dark/Red Palettes) */
+  --color-cyan-raw: 0 100% 58%;          /* Vibrant Red */
   --color-cyan: hsl(var(--color-cyan-raw));
   
-  --color-purple-raw: 280 100% 60%;
+  --color-purple-raw: 350 90% 50%;       /* Crimson Red */
   --color-purple: hsl(var(--color-purple-raw));
   
-  --color-blue-raw: 215 100% 50%;
+  --color-blue-raw: 10 90% 55%;          /* Soft Red / Orange-Red */
   --color-blue: hsl(var(--color-blue-raw));
 
   /* Core UI Colors */
   --text-primary: hsl(0 0% 98%);
-  --text-secondary: hsl(230 15% 70%);
-  --text-muted: hsl(230 10% 50%);
+  --text-secondary: hsl(0 0% 70%);
+  --text-muted: hsl(0 0% 50%);
   
-  --border-color: rgba(255, 255, 255, 0.06);
-  --border-color-glow: hsla(180 100% 50% / 0.2);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-glow: hsla(0 100% 58% / 0.2);
 
   /* Status Badges */
   --status-pending: hsl(35 90% 55%);
-  --status-contacted: hsl(215 100% 50%);
-  --status-scheduled: hsl(280 100% 60%);
-  --status-archived: hsl(230 10% 50%);
+  --status-contacted: hsl(0 100% 58%);
+  --status-scheduled: hsl(350 90% 50%);
+  --status-archived: hsl(0 0% 50%);
   --status-success: hsl(145 80% 50%);
 
   /* Gradients */
-  --gradient-blue: linear-gradient(135deg, hsl(215, 100%, 50%), hsl(250, 100%, 60%));
+  --gradient-blue: linear-gradient(135deg, hsl(0, 100%, 58%), hsl(350, 90%, 50%));
   --gradient-neon: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
   --gradient-dark: linear-gradient(180deg, hsla(var(--bg-color-raw) / 0.95), hsla(var(--bg-card-raw) / 0.98));
   --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);

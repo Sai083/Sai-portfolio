@@ -57,12 +57,12 @@
 .btn-primary {
   background: var(--gradient-blue);
   color: var(--text-primary);
-  box-shadow: 0 4px 15px rgba(0, 100, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 42, 42, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 100, 255, 0.5), 0 0 10px var(--color-cyan);
+  box-shadow: 0 6px 20px rgba(255, 42, 42, 0.5), 0 0 10px var(--color-cyan);
 }
 
 .btn-secondary {
@@ -74,20 +74,20 @@
 
 .btn-secondary:hover {
   border-color: var(--color-cyan);
-  background: hsla(230, 20%, 20%, 0.6);
+  background: hsla(0, 0%, 20%, 0.6);
   transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px hsla(0, 100%, 58%, 0.2);
 }
 
 .btn-accent {
   background: var(--gradient-neon);
   color: var(--text-primary);
-  box-shadow: 0 4px 15px rgba(180, 0, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
 }
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(180, 0, 255, 0.5), 0 0 15px var(--color-purple);
+  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.5), 0 0 15px var(--color-purple);
 }
 
 /* Interactive Badge Chips */
@@ -176,7 +176,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(180, 0, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(220, 20, 60, 0.4);
   z-index: 99;
   transition: var(--transition-normal);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -184,7 +184,7 @@
 
 .chat-launcher:hover {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 6px 25px rgba(180, 0, 255, 0.6), 0 0 15px var(--color-cyan);
+  box-shadow: 0 6px 25px rgba(220, 20, 60, 0.6), 0 0 15px var(--color-cyan);
 }
 
 .chat-launcher svg {
@@ -236,7 +236,7 @@
 
 .form-control:focus {
   border-color: var(--color-cyan);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 10px hsla(0, 100%, 58%, 0.15);
   background: rgba(0, 0, 0, 0.3);
 }
 
